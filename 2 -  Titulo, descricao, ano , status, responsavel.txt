@@ -1,0 +1,184 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<locale.h>
+#include<stdbool.h>
+
+struct projeto{
+	int codigo;
+	char titulo[50];
+	char descricao[100];
+	int ano;
+	int status;
+	char responsavel[50];	
+};
+struct projeto projetos[200];
+int sequencia=0;
+const int a=1,f=2,c=3;
+
+cadastrarProjeto(){
+	bool cadastro=true;
+	char continuar;
+	int status;
+	do{
+		system("cls");
+		projetos[sequencia].codigo=sequencia+1;
+		printf("\nDigite o titulo do projeto: ");
+		fflush(stdin);
+		gets(projetos[sequencia].titulo);
+		printf("\nDigite a descrição do projeto: ");
+		fflush(stdin);
+		gets(projetos[sequencia].descricao);
+		printf("\nDigite o ano do projeto: ");
+		scanf("%d",&projetos[sequencia].ano);
+		printf("\nDigite o status do projeto\n 1 para A FAZER\n 2 para FAZENDO\n 3 para CONCLUÍDO\n opção: ");
+		scanf("%d",&status);
+		if(status>0 && status<=3){
+			projetos[sequencia].status=status;
+		}else{
+			printf("\nNão foi registrado status para esse projeto");
+		}
+		printf("\nDigite o nome do resposável: ");
+		fflush(stdin);
+		gets(projetos[sequencia].responsavel);
+		system("cls");
+		printf("\nCódigo gerado: %d",projetos[sequencia].codigo);
+		printf("\nO nome do projeto cadastrado: %s",projetos[sequencia].titulo);
+		printf("\nCadastro realizado com sucesso");
+		printf("\nDeseja realizar um novo cadastro: ");
+		scanf("%c",&continuar);
+		if(continuar=='n'||continuar=='N'){
+			cadastro=false;
+		}
+		sequencia++;
+		
+	}while(cadastro==true);
+}
+listarTodos(){
+	system("cls");
+	int x;
+	if(projetos[0].codigo>0){
+		for(x=0;x<sequencia;x++){
+			printf("\n________________________________\n");
+			printf("\nCódigo: %d",projetos[x].codigo);
+			printf("\nTítulo: %s",projetos[x].titulo);
+			printf("\nDescrição: %s",projetos[x].descricao);
+			printf("\nAno: %d",projetos[x].ano);
+			switch(projetos[x].status){
+				case 1:
+					printf("\nStatus: A FAZER");
+				break;
+				case 2:
+					printf("\nStatus: FAZENDO");
+				break;
+				case 3:
+					printf("\nStatus: CONCLUÍDO");
+				break;
+			}
+			printf("\nResponsável: %s\n",projetos[x].responsavel);
+		}
+	}else{
+			printf("\nNenhum projeto cadastrado\n");
+	}
+	system("pause");	
+}
+porStatus(int status){
+	system("cls");
+	int x;
+	int achou;
+	for(x=0;x<sequencia;x++){
+		if(projetos[x].status==status){
+			printf("\n________________________________\n");
+			printf("\nCódigo: %d",projetos[x].codigo);
+			printf("\nTítulo: %s",projetos[x].titulo);
+			printf("\nDescrição: %s",projetos[x].descricao);
+			printf("\nAno: %d",projetos[x].ano);
+			switch(projetos[x].status){
+				case 1:
+					printf("\nStatus: A FAZER");
+				break;
+				case 2:
+					printf("\nStatus: FAZENDO");
+				break;
+				case 3:
+					printf("\nStatus: CONCLUÍDO");
+				break;
+			}
+			printf("\nResponsável: %s\n",projetos[x].responsavel);
+			achou=1;
+		}else{
+			achou=0;
+		}
+	}
+	if(achou!=1){
+			printf("\nNenhum projeto encontrado\n");
+	}
+	system("pause");
+}
+
+buscaCodigo(int codigo){
+		int x,achou;
+		for(x=0;x<sequencia;x++){
+			if(projetos[x].codigo==codigo){
+				printf("\n________________________________\n");
+				printf("\nCódigo: %d",projetos[x].codigo);
+				printf("\nTítulo: %s",projetos[x].titulo);
+				printf("\nDescrição: %s",projetos[x].descricao);
+				printf("\nAno: %d",projetos[x].ano);
+				switch(projetos[x].status){
+					case 1:
+						printf("\nStatus: A FAZER");
+					break;
+					case 2:
+						printf("\nStatus: FAZENDO");
+					break;
+					case 3:
+						printf("\nStatus: CONCLUÍDO");
+					break;
+				}
+				printf("\nResponsável: %s\n",projetos[x].responsavel);
+				achou=1;
+			}else{
+				achou=0;
+			}
+		}
+		if(achou!=1){
+			printf("\nNenhum projeto encontrado\n");
+		}
+	system("pause");
+}
+
+main(){
+	setlocale(LC_ALL, "Portuguese");
+	int opcao,codigo;
+	do{
+		system("cls");
+		printf("\nDigite 1 para cadastrar projetos\nDigite 2 para listar todos os projetos\nDigite 3 para listar os projetos com status A FAZER\nDigite 4 para listar os projetos com status FAZENDO\nDigite 5 para listar os projetos com status CONCLUIDO\nDigite 6 para buscar por código\nDigite sua opção: ");
+		scanf("%d",&opcao);
+		switch(opcao){
+			case 1:
+				cadastrarProjeto();
+			break;
+			case 2:
+				listarTodos();
+			break;
+			case 3:
+				porStatus(a);
+			break;
+			case 4:
+				porStatus(f);
+			break;
+			case 5:
+				porStatus(c);
+			break;
+			case 6:
+				system("cls");
+				printf("\nDigite o código a ser buscado: ");
+				scanf("%d",&codigo);
+				buscaCodigo(codigo);
+			break;
+			default:
+				printf("\nOpção inválida, digite novamente");
+		}
+	}while(opcao!=0);
+	return 0;
+}

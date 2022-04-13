@@ -1,0 +1,16 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<locale.h>
+
+main(){
+	setlocale(LC_ALL, "Portuguese");
+	int opcao;
+	do{
+		system("cls");
+		printf("\nDigite 1 para cadastrar projetos\nDigite 2 para listar todos os projetos\nDigite 3 para listar os projetos com status A FAZER\nDigite 4 para listar os projetos com status FAZENDO\nDigite 5 para listar os projetos com status CONLUIDO\nDigite 6 para listar os projeto a pensar\nDigite sua opção: ");
+		scanf("%d",&opcao);
+	}while(opcao!=0);
+	
+	
+	return 0;
+}

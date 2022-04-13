@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<locale.h>
+
+struct pessoa{
+	char cpf[20];
+	char nome[100];
+	char sexo[1];
+	int idade;
+};
+struct pessoa paciente;
+
+cadastro_paciente(){
+	printf("Faça seu cadastro\nDigite seu CPF: ");
+	gets(paciente.cpf);
+	fflush(stdin);
+	printf("\nDigite seu nome: ");
+	gets(paciente.nome);
+	fflush(stdin);
+	printf("\nDigite seu sexo -M para masculino ou F para feminino: ");
+	scanf("%s",&paciente.sexo);
+	printf("\nDigite sua idade: ");
+	scanf("%d",&paciente.idade);
+	system("cls");
+	printf("\nConfira os seus dados\n\n");
+	printf("CPF : %s\n",paciente.cpf);
+	printf("Nome : %s\n",paciente.nome);
+	printf("Sexo : %s\n",paciente.sexo);
+	printf("Idade : %d\n",paciente.idade);
+}
+
+
+
+main(){
+	setlocale(LC_ALL, "Portuguese");
+	cadastro_paciente();
+	
+	return 0;	
+}
+
+
+
+
+
+
